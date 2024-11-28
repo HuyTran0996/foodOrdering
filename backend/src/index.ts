@@ -2,8 +2,10 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 import morgan from "morgan";
+import dbConnect from "./config/dbConnect";
 
 const app = express();
+dbConnect();
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());

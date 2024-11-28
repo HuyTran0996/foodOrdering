@@ -1,13 +1,29 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { Button } from "./components/ui/button";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./layouts/layout";
+import HomePage from "./pages/HomePage";
+import Auth0ProviderWithNavigate from "./auth/Auth0ProviderWithNavigate";
 
 function App() {
-  const [count, setCount] = useState(0);
+  return (
+    <BrowserRouter>
+      <Auth0ProviderWithNavigate>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <HomePage />
+              </Layout>
+            }
+          />
 
-  return <Button>Click me</Button>;
+          <Route path="/user-profile" element={<Layout>user-profile</Layout>} />
+
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Auth0ProviderWithNavigate>
+    </BrowserRouter>
+  );
 }
 
 export default App;
